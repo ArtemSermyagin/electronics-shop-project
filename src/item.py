@@ -67,7 +67,8 @@ class Item:
                 price = cls.string_to_number(row[1])
                 quantity = cls.string_to_number(row[2])
                 item = Item(name, price, quantity)
-                cls.all.append(item)
+
+                # cls.all.append(item)
 
     @staticmethod
     def string_to_number(value: str, default: float = 0.0, raise_error: bool = False) -> float:
