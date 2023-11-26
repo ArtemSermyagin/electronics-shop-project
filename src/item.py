@@ -5,6 +5,7 @@ class Item:
     """
     Класс для представления товара в магазине.
     """
+
     pay_rate = 1.0
     all = []
 
@@ -20,7 +21,6 @@ class Item:
         self.price = price
         self.quantity = quantity
         Item.all.append(self)
-        # self.all.clear()
 
     @property
     def name(self):
@@ -56,22 +56,18 @@ class Item:
         :param filename: Имя CSV-файла.
         """
         cls.all.clear()
-        with open(filename, newline='', encoding='utf-8') as csvfile:
-            reader = csv.reader(csvfile)
-            skip_first = True
-            for row in reader:
-                if skip_first:
-                    skip_first = False
-                    continue
-                name = row[0]
-                price = cls.string_to_number(row[1])
-                quantity = cls.string_to_number(row[2])
-                item = Item(name, price, quantity)
-
-                # cls.all.append(item)
+        with open(filename, encoding="windows-1251") as csvfile:
+            items = csv.DictReader(csvfile, delimiter=",")
+            for item in items:
+                name = item["name"]
+                price = float(item["price"])
+                quantity = cls.string_to_number(item["quantity"])
+                cls(name, price, quantity)
 
     @staticmethod
-    def string_to_number(value: str, default: float = 0.0, raise_error: bool = False) -> float:
+    def string_to_number(
+        value: str, default: int = 0, raise_error: bool = False
+    ) -> int:
         """
         Преобразует строку в число.
 
@@ -81,7 +77,7 @@ class Item:
         :return: Преобразованное число.
         """
         try:
-            return float(value)
+            return int(float(value))
         except ValueError:
             if raise_error:
                 raise  # выбросить исключение при неудачном преобразовании
