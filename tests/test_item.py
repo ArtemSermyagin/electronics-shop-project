@@ -3,7 +3,6 @@ import pytest
 from src.item import Item
 
 
-
 def test_calculate_total_price():
     item1 = Item("Смартфон", 10000, 20)
     item2 = Item("Ноутбук", 20000, 5)
