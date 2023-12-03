@@ -9,6 +9,12 @@ class Item:
     pay_rate = 1.0
     all = []
 
+    def __repr__(self):
+        return f"Item('{self.__name}', {self.price }, {self.quantity})"
+
+    def __str__(self):
+        return self.__name
+
     def __init__(self, name: str, price: float, quantity: int) -> None:
         """
         Создание экземпляра класса item.
@@ -46,7 +52,7 @@ class Item:
         Применяет установленную скидку для конкретного товара.
         """
 
-        self.price = self.price * self.pay_rate
+        self.price *= self.pay_rate
 
     @classmethod
     def instantiate_from_csv(cls, filename: str) -> None:
