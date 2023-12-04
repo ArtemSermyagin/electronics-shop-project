@@ -1,3 +1,5 @@
+import pytest
+
 from src.item import Item
 
 
@@ -27,3 +29,15 @@ def test_instantiate_from_csv_():
     assert Item.all[0].name == "Смартфон"
     assert Item.all[1].price == 1000
     assert Item.all[2].quantity == 5
+
+@pytest.fixture
+def sample_item():
+    return Item("Смартфон", 50.99, 1)
+
+
+def test_str_method(sample_item):
+    assert str(sample_item) == "Смартфон"
+
+
+def test_repr_method(sample_item):
+    assert repr(sample_item) == "Item('Смартфон', 50.99, 1)"

@@ -9,11 +9,11 @@ class Item:
     pay_rate = 1.0
     all = []
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"Item('{self.__name}', {self.price }, {self.quantity})"
 
     def __str__(self):
-        return self.__name
+        return f"{self.__name}"
 
     def __init__(self, name: str, price: float, quantity: int) -> None:
         """
