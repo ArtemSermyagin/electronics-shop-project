@@ -1,6 +1,7 @@
 import pytest
 
 from src.item import Item
+from src.phone import Phone
 
 
 def test_calculate_total_price():
@@ -30,6 +31,7 @@ def test_instantiate_from_csv_():
     assert Item.all[1].price == 1000
     assert Item.all[2].quantity == 5
 
+
 @pytest.fixture
 def sample_item():
     return Item("Смартфон", 50.99, 1)
@@ -41,3 +43,28 @@ def test_str_method(sample_item):
 
 def test_repr_method(sample_item):
     assert repr(sample_item) == "Item('Смартфон', 50.99, 1)"
+
+
+def test_srt():
+    phone1 = Phone("iPhone 14", 120_000, 5, 2)
+    item1 = Item("Смартфон", 10000, 20)
+    assert str(phone1) == "iPhone 14"
+    assert repr(phone1) == "Phone('iPhone 14', 120000, 5, 2)"
+    assert phone1.number_of_sim == 2
+
+    assert item1 + phone1 == 25
+    assert phone1 + phone1 == 10
+
+
+def test_invalid_number_of_sim():
+    with pytest.raises(ValueError) as exception:
+        Phone("Phone 1", 1000.0, 1, 0)
+    assert (
+        str(exception.value)
+        == "Количество физических SIM-карт должно быть целым числом больше нуля."
+    )
+
+
+def test_valid_number_of_sim():
+    phone = Phone("Phone 2", 1500.0, 2, 1)
+    assert phone.number_of_sim == 1

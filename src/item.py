@@ -10,7 +10,7 @@ class Item:
     all = []
 
     def __repr__(self) -> str:
-        return f"Item('{self.__name}', {self.price }, {self.quantity})"
+        return f"Item('{self.__name}', {self.price }, {self.quantity})" # noqa
 
     def __str__(self):
         return f"{self.__name}"
@@ -27,6 +27,9 @@ class Item:
         self.price = price
         self.quantity = quantity
         Item.all.append(self)
+
+    def __add__(self, other):
+        return self.quantity + other.quantity
 
     @property
     def name(self):
