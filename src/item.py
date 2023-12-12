@@ -11,7 +11,7 @@ class Item(ABC):
     all = []
 
     def __repr__(self) -> str:
-        return f"Item('{self.__name}', {self.price }, {self.quantity})" # noqa
+        return f"Item('{self.__name}', {self.price }, {self.quantity})"  # noqa
 
     def __str__(self):
         return f"{self.__name}"
