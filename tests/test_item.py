@@ -1,3 +1,5 @@
+import csv
+
 import pytest
 
 from src.item import Item
@@ -15,6 +17,17 @@ def test_instantiate_from_csv():
     csv_data = "Phone,199.99,3\nLaptop,899.99,1\n"
     with open("test_items.csv", "w", encoding="utf-8") as csv_file:
         csv_file.write(csv_data)
+
+
+def test_instantiate_from_csv_file_not_found():
+    with pytest.raises(FileNotFoundError):
+        with open("ite.csv", encoding="windows-1251") as csvfile:
+            items = csv.DictReader(csvfile, delimiter=",")
+
+
+def test_instantiate_from_csv_corrupted_file():
+    with pytest.raises(csv.Error, match='Файл item.csv поврежден'):
+        Item.instantiate_from_csv()
 
 
 def test_apply_discount():
@@ -60,8 +73,8 @@ def test_invalid_number_of_sim():
     with pytest.raises(ValueError) as exception:
         Phone("Phone 1", 1000.0, 1, 0)
     assert (
-        str(exception.value)
-        == "Количество физических SIM-карт должно быть целым числом больше нуля."
+            str(exception.value)
+            == "Количество физических SIM-карт должно быть целым числом больше нуля."
     )
 
 
