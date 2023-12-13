@@ -59,7 +59,7 @@ class Item:
         self.price *= self.pay_rate
 
     @classmethod
-    def instantiate_from_csv(cls, file_name="item.csv") -> None:
+    def instantiate_from_csv(cls, file_name="item.csv"):
         """
         Создает объекты Item из данных CSV-файла.
 
@@ -100,7 +100,8 @@ class Item:
         """
         try:
             return int(float(value))
-        except ValueError:
-            if raise_error:
-                raise  # выбросить исключение при неудачном преобразовании
-            # return default
+        except ValueError("выбросить исключение при неудачном преобразовании"):
+            print("Ошибка")
+
+
+# print(Item.instantiate_from_csv("../tests/item.csv"))
