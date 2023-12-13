@@ -2,7 +2,7 @@ import csv
 from abc import ABC
 
 
-class Item(ABC):
+class Item:
     """
     Класс для представления товара в магазине.
     """
@@ -59,20 +59,32 @@ class Item(ABC):
         self.price *= self.pay_rate
 
     @classmethod
-    def instantiate_from_csv(cls, filename: str) -> None:
+    def instantiate_from_csv(cls, file_name="item.csv") -> None:
         """
         Создает объекты Item из данных CSV-файла.
 
         :param filename: Имя CSV-файла.
         """
         cls.all.clear()
-        with open(filename, encoding="windows-1251") as csvfile:
-            items = csv.DictReader(csvfile, delimiter=",")
-            for item in items:
-                name = item["name"]
-                price = float(item["price"])
-                quantity = cls.string_to_number(item["quantity"])
-                cls(name, price, quantity)
+        try:
+            with open(file_name, encoding="windows-1251") as csvfile:
+                items = csv.DictReader(csvfile, delimiter=",")
+                header = next(items)
+                if 'name' not in header or 'price' not in header or 'quantity' not in header:
+                    raise csv.Error("Отсутствуют необходимые колонки в заголовке файла CSV")
+                else:
+                    for item in items:
+                        name = item["name"]
+                        price = float(item["price"])
+                        quantity = cls.string_to_number(item["quantity"])
+                        cls(name, price, quantity)
+                        print(name, price, quantity)
+        except FileNotFoundError:
+            print("Отсутствует файл item.csv")
+        except csv.Error:
+            print('Файл item.csv поврежден')
+
+
 
     @staticmethod
     def string_to_number(
