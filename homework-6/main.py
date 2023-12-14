@@ -1,3 +1,4 @@
+from set import OPEN_CSV
 from src.item import Item
 
 if __name__ == "__main__":
@@ -6,5 +7,5 @@ if __name__ == "__main__":
     # FileNotFoundError: Отсутствует файл item.csv
 
     # В файле items.csv удалена последняя колонка.
-    Item.instantiate_from_csv("../src/item.csv")
+    Item.instantiate_from_csv(OPEN_CSV)
     # InstantiateCSVError: Файл item.csv поврежден

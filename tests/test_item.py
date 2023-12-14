@@ -27,8 +27,8 @@ def test_instantiate_from_csv_file_not_found():
 
 
 def test_instantiate_from_csv_corrupted_file():
-    with pytest.raises(csv.Error):
-        Item.instantiate_from_csv(OPEN_CSV)
+    # with pytest.raises(csv.Error):
+    assert Item.instantiate_from_csv(OPEN_CSV) == 'Файл item.csv поврежден'
 
 
 def test_apply_discount():
