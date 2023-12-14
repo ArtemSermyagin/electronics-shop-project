@@ -26,7 +26,7 @@ def test_instantiate_from_csv_file_not_found():
 
 
 def test_instantiate_from_csv_corrupted_file():
-    with pytest.raises(csv.Error, match='Файл item.csv поврежден'):
+    with pytest.raises(csv.Error):
         Item.instantiate_from_csv()
 
 

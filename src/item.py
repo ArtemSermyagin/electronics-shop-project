@@ -71,7 +71,7 @@ class Item:
                 items = csv.DictReader(csvfile, delimiter=",")
                 header = next(items)
                 if 'name' not in header or 'price' not in header or 'quantity' not in header:
-                    raise csv.Error("Отсутствуют необходимые колонки в заголовке файла CSV")
+                    raise csv.Error('Файл item.csv поврежден')
                 else:
                     for item in items:
                         name = item["name"]
