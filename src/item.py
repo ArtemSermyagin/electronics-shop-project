@@ -59,7 +59,7 @@ class Item:
         self.price *= self.pay_rate
 
     @classmethod
-    def instantiate_from_csv(cls, file_name="item.csv"):
+    def instantiate_from_csv(cls, file_name):
         """
         Создает объекты Item из данных CSV-файла.
 

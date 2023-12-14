@@ -2,6 +2,7 @@ import csv
 
 import pytest
 
+from set import OPEN_CSV
 from src.item import Item
 from src.phone import Phone
 
@@ -27,7 +28,7 @@ def test_instantiate_from_csv_file_not_found():
 
 def test_instantiate_from_csv_corrupted_file():
     with pytest.raises(csv.Error):
-        Item.instantiate_from_csv()
+        Item.instantiate_from_csv(OPEN_CSV)
 
 
 def test_apply_discount():
