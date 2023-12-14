@@ -1,7 +1,6 @@
 import csv
 
 
-
 class Item:
     """
     Класс для представления товара в магазине.
@@ -11,7 +10,7 @@ class Item:
     all = []
 
     def __repr__(self) -> str:
-        return f"Item('{self.__name}', {self.price }, {self.quantity})"  # noqa
+        return f"Item('{self.__name}', {self.price}, {self.quantity})"  # noqa
 
     def __str__(self):
         return f"{self.__name}"
@@ -82,13 +81,11 @@ class Item:
         except FileNotFoundError:
             print("Отсутствует файл item.csv")
         except csv.Error:
-            print('Файл item.csv поврежден')
-
-
+            raise csv.Error('Файл item.csv поврежден')
 
     @staticmethod
     def string_to_number(
-        value: str, default: int = 0, raise_error: bool = False
+            value: str, default: int = 0, raise_error: bool = False
     ) -> int:
         """
         Преобразует строку в число.
@@ -102,6 +99,5 @@ class Item:
             return int(float(value))
         except ValueError("выбросить исключение при неудачном преобразовании"):
             print("Ошибка")
-
 
 # print(Item.instantiate_from_csv("../tests/item.csv"))
